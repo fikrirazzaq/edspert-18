@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../blocs/auth/auth_bloc.dart';
+import '../../router/routes.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -19,6 +23,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Akun Saya'),
+        actions: [
+          IconButton(
+              onPressed: () async {
+                await context.read<AuthBloc>().signOut();
+                Navigator.pushReplacementNamed(context, Routes.loginScreen);
+              },
+              icon: Icon(Icons.exit_to_app)),
+        ],
       ),
       body: ListView(
         children: [
