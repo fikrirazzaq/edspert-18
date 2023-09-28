@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "837580173613",
+    "project_id": "edspert-a3faa",
+    "storage_bucket": "edspert-a3faa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837580173613:android:b11fb33ed76ea7dc71e3a4",
+        "android_client_info": {
+          "package_name": "com.example.learning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "837580173613-67t7to1c3npb719o39icetf9eki2kkhp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2vgvDTFf_aT_ivoXT3FLacowMLW_NUXo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "837580173613-67t7to1c3npb719o39icetf9eki2kkhp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
