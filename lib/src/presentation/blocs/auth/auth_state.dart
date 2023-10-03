@@ -59,7 +59,11 @@ class ErrorRegisterUserState extends AuthState {
 /// Get User Profile
 class LoadingGetUserProfileState extends AuthState {}
 
-class SuccessGetUserProfileState extends AuthState {}
+class SuccessGetUserProfileState extends AuthState {
+  final UserDataEntity userDataEntity;
+
+  SuccessGetUserProfileState({required this.userDataEntity});
+}
 
 class ErrorGetUserProfileState extends AuthState {
   final String message;

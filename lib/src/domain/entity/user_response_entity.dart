@@ -20,6 +20,7 @@ class UserDataEntity {
   final String jenjang;
   final String userGender;
   final String userStatus;
+  final String kelas;
 
   UserDataEntity({
     required this.iduser,
@@ -31,5 +32,6 @@ class UserDataEntity {
     required this.jenjang,
     required this.userGender,
     required this.userStatus,
+    required this.kelas,
   });
 }

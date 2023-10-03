@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/datasource/banner_remote_datasource.dart';
@@ -31,114 +32,95 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<BannerCubit>().getBanners();
+      context.read<CourseBloc>().add(GetCoursesEvent(majorName: 'IPA'));
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) {
-            CourseRepository repo = CourseRepositoryImpl(
-              remoteDatasource: CourseRemoteDatasource(client: Dio()),
-            );
-            return CourseBloc(
-              GetCoursesUsecase(repository: repo),
-              GetExercisesByCourseUsecase(repository: repo),
-              GetQuestionsByExerciseUsecase(repository: repo),
-              SubmitExerciseAnswerUsecase(repository: repo),
-              GetExercisesResultUsecase(repository: repo),
-            )..add(GetCoursesEvent(majorName: 'IPA'));
-          },
-        ),
-        BlocProvider(
-          create: (context) => BannerCubit(
-            GetBannersUsecase(
-              repository: BannerRepositoryImpl(
-                remoteDatasource: BannerRemoteDatasource(client: Dio()),
-              ),
+    return Scaffold(
+      backgroundColor: const Color(0xFFF3F7F8),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        title: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Fadil',
+              style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
             ),
-          )..getBanners(),
-        ),
-        BlocProvider(
-          create: (context) => HomeNavCubit(),
-        ),
-      ],
-      child: Scaffold(
-        backgroundColor: const Color(0xFFF3F7F8),
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
-          title: const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Fadil',
-                style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                'Selamat datang',
-                style: TextStyle(fontSize: 10),
-              ),
-            ],
-          ),
-          actions: const [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: CircleAvatar(
-                backgroundColor: Colors.red,
-              ),
-            )
+            Text(
+              'Selamat datang',
+              style: TextStyle(fontSize: 10),
+            ),
           ],
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const WelcomingWidget(),
-                const SizedBox(height: 16),
-                const SectionTitle(title: 'Terbaru'),
-                const SizedBox(height: 8),
-                BlocBuilder<BannerCubit, BannerState>(
-                  builder: (context, bannerState) {
-                    if (bannerState is BannerLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-
-                    if (bannerState is BannerSuccess) {
-                      return BannerBuilder(bannerList: bannerState.banner.data);
-                    }
-
-                    return const SizedBox.shrink();
-                  },
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const SectionTitle(title: 'Pilih Pelajaran'),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, Routes.courseListScreen);
-                      },
-                      child: const Text('Lihat Semua'),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 8),
-                BlocBuilder<CourseBloc, CourseState>(
-                  builder: (context, courseState) {
-                    if (courseState is LoadingGetCoursesState) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-
-                    if (courseState is SuccessGetCoursesState) {
-                      return CourseBuilder(courseList: courseState.data ?? []);
-                    }
-                    return const SizedBox.shrink();
-                  },
-                ),
-              ],
+        actions: const [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: CircleAvatar(
+              backgroundColor: Colors.red,
             ),
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const WelcomingWidget(),
+              const SizedBox(height: 16),
+              const SectionTitle(title: 'Terbaru'),
+              const SizedBox(height: 8),
+              BlocBuilder<BannerCubit, BannerState>(
+                builder: (context, bannerState) {
+                  if (bannerState is BannerLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (bannerState is BannerSuccess) {
+                    return BannerBuilder(bannerList: bannerState.banner.data);
+                  }
+
+                  return const SizedBox.shrink();
+                },
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SectionTitle(title: 'Pilih Pelajaran'),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.courseListScreen);
+                    },
+                    child: const Text('Lihat Semua'),
+                  )
+                ],
+              ),
+              const SizedBox(height: 8),
+              BlocBuilder<CourseBloc, CourseState>(
+                buildWhen: (previous, current) =>
+                    previous is LoadingGetCoursesState && current is SuccessGetCoursesState,
+                builder: (context, courseState) {
+                  if (courseState is LoadingGetCoursesState) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (courseState is SuccessGetCoursesState) {
+                    return CourseBuilder(courseList: courseState.data ?? []);
+                  }
+                  return const SizedBox.shrink();
+                },
+              ),
+            ],
           ),
         ),
       ),

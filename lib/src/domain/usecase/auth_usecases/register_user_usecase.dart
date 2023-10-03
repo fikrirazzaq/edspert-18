@@ -6,6 +6,5 @@ class RegisterUserUsecase {
 
   const RegisterUserUsecase({required this.repository});
 
-  Future<bool> call(RegisterUserRequestModel request) async =>
-      await repository.registerUser(request: request);
+  Future<bool> call(RegisterUserRequestModel request) async => await repository.registerUser(request: request);
 }

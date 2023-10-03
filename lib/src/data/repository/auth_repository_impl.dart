@@ -23,6 +23,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<UserDataEntity?> getUserByEmail({required String email}) async {
     final userModel = await remoteDatasource.getUserByEmail(email: email);
     if (userModel != null) {
+      print('userModel.data?.kelas: ${userModel.data?.kelas}');
       final data = UserDataEntity(
         iduser: userModel.data?.iduser ?? '',
         userName: userModel.data?.userName ?? '',
@@ -33,6 +34,7 @@ class AuthRepositoryImpl implements AuthRepository {
         jenjang: userModel.data?.jenjang ?? '',
         userGender: userModel.data?.userGender ?? '',
         userStatus: userModel.data?.userStatus ?? '',
+        kelas: userModel.data?.kelas ?? '',
       );
       return data;
     }
@@ -81,8 +83,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
       // Obtain the auth details from the request
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
       // Create a new credential
       final credential = GoogleAuthProvider.credential(
@@ -91,8 +92,7 @@ class AuthRepositoryImpl implements AuthRepository {
       );
 
       // Once signed in, return the UserCredential
-      UserCredential userCredentialResult =
-          await FirebaseAuth.instance.signInWithCredential(credential);
+      UserCredential userCredentialResult = await FirebaseAuth.instance.signInWithCredential(credential);
       return userCredentialResult.user;
     } catch (e) {
       debugPrint('Err signInWithGoogle $e');

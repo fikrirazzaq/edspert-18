@@ -16,13 +16,11 @@ class CourseListItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed(
-          Routes.exerciseListScreen,
-          arguments: ExerciseListScreenArgs(
-            courseId: data.courseId,
-            courseName: data.courseName,
-          ),
-        );
+        Navigator.of(context).pushNamed(Routes.exerciseListScreen,
+            arguments: ExerciseListScreenArgs(
+              courseId: data.courseId,
+              courseName: data.courseName,
+            ));
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -48,8 +46,7 @@ class CourseListItemWidget extends StatelessWidget {
                   Text(data.courseName),
                   Text('${data.jumlahDone}/${data.jumlahMateri}'),
                   LinearProgressIndicator(
-                    value: data.jumlahDone /
-                        (data.jumlahMateri == 0 ? 1 : data.jumlahMateri),
+                    value: data.jumlahDone / (data.jumlahMateri == 0 ? 1 : data.jumlahMateri),
                   ),
                 ],
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learning/src/domain/entity/exercise_list_response_entity.dart';
@@ -27,16 +28,18 @@ class ExerciseListScreen extends StatefulWidget {
 
 class _ExerciseListScreenState extends State<ExerciseListScreen> {
   String courseName = '';
+  String courseId = '';
 
   @override
   void initState() {
-    final dynamic args = ModalRoute.of(context)?.settings.arguments;
-    if (args is ExerciseListScreenArgs) {
-      courseName = args.courseName;
-    }
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      final dynamic args = ModalRoute.of(context)?.settings.arguments;
+      if (args is ExerciseListScreenArgs) {
+        courseId = args.courseId;
+        courseName = args.courseName;
+      }
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.read<CourseBloc>().add(GetCoursesEvent(majorName: 'IPA'));
+      context.read<CourseBloc>().add(GetExercisesByCourseEvent(courseId: courseId));
     });
     super.initState();
   }
@@ -63,7 +66,7 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
               crossAxisSpacing: 12,
               childAspectRatio: 153 / 96,
             ),
-            itemCount: 0,
+            itemCount: courseState.data.length,
             itemBuilder: (context, index) {
               ExerciseDataEntity data = courseState.data[index];
               return ExerciseGridItemWidget(

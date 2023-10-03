@@ -47,6 +47,7 @@ class CourseBloc extends Bloc<CourseEvent, CourseState> {
         if (getExercises == null) {
           emit(ErrorGetExercisesByCourseState('Something wrong'));
         } else {
+          print('getExercises: $getExercises');
           emit(SuccessGetExercisesByCourseState(getExercises));
         }
       }

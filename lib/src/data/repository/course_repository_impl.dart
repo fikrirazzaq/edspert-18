@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:learning/src/data/datasource/course_remote_datasource.dart';
 import 'package:learning/src/data/model/course_list_response_model.dart';
 import 'package:learning/src/data/model/submit_answer_request_model.dart';
@@ -47,7 +48,7 @@ class CourseRepositoryImpl implements CourseRepository {
   Future<ExerciseResultResponseEntity?> getExerciseResult(String exerciseId) async {
     final response = await remoteDatasource.getExerciseResult(
       exerciseId: exerciseId,
-      email: '',
+      email: FirebaseAuth.instance.currentUser?.email ?? '',
     );
 
     if (response.data?.result?.jumlahScore == null) {
@@ -96,7 +97,7 @@ class CourseRepositoryImpl implements CourseRepository {
   Future<List<ExerciseDataEntity>?> getExercisesByCourse(String courseId) async {
     final response = await remoteDatasource.getExercises(
       courseId: courseId,
-      email: '',
+      email: FirebaseAuth.instance.currentUser?.email ?? '',
     );
 
     if (response.data == null) {
@@ -128,7 +129,7 @@ class CourseRepositoryImpl implements CourseRepository {
   Future<List<QuestionListDataEntity>?> getQuestionsByExercise(String exerciseId) async {
     final response = await remoteDatasource.getQuestions(
       exerciseId: exerciseId,
-      email: '',
+      email: FirebaseAuth.instance.currentUser?.email ?? '',
     );
 
     if ((response.data ?? []).isEmpty) {

@@ -35,6 +35,13 @@ class LoginBodyWidget extends StatelessWidget {
                   width: 270,
                   height: 200,
                   fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      'assets/error_image.jpg',
+                      width: 270,
+                      height: 200,
+                    );
+                  },
                 ),
                 const SizedBox(height: 36),
                 const Text(

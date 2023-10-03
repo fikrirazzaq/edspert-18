@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learning/src/domain/entity/course_list_response_entity.dart';
 
@@ -20,7 +21,7 @@ class _CourseListScreenState extends State<CourseListScreen> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<CourseBloc>().add(GetCoursesEvent(majorName: 'IPA'));
     });
   }

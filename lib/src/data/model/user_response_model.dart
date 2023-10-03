@@ -32,17 +32,20 @@ class UserDataModel {
   String? jenjang;
   String? userGender;
   String? userStatus;
+  String? kelas;
 
-  UserDataModel(
-      {this.iduser,
-      this.userName,
-      this.userEmail,
-      this.userFoto,
-      this.userAsalSekolah,
-      this.dateCreate,
-      this.jenjang,
-      this.userGender,
-      this.userStatus});
+  UserDataModel({
+    this.iduser,
+    this.userName,
+    this.userEmail,
+    this.userFoto,
+    this.userAsalSekolah,
+    this.dateCreate,
+    this.jenjang,
+    this.userGender,
+    this.userStatus,
+    this.kelas,
+  });
 
   UserDataModel.fromJson(Map<String, dynamic> json) {
     iduser = json['iduser'];
@@ -54,6 +57,7 @@ class UserDataModel {
     jenjang = json['jenjang'];
     userGender = json['user_gender'];
     userStatus = json['user_status'];
+    kelas = json['kelas'];
   }
 
   Map<String, dynamic> toJson() {
@@ -67,6 +71,7 @@ class UserDataModel {
     data['jenjang'] = jenjang;
     data['user_gender'] = userGender;
     data['user_status'] = userStatus;
+    data['kelas'] = kelas;
     return data;
   }
 }
