@@ -12,6 +12,7 @@ import '../model/question_list_response_model.dart';
 
 class CourseRepositoryImpl implements CourseRepository {
   final CourseRemoteDatasource remoteDatasource;
+
   const CourseRepositoryImpl({required this.remoteDatasource});
 
   @override
@@ -43,12 +44,15 @@ class CourseRepositoryImpl implements CourseRepository {
   }
 
   @override
-  Future<ExerciseResultResponseEntity> getExerciseResult(
-      String exerciseId) async {
+  Future<ExerciseResultResponseEntity?> getExerciseResult(String exerciseId) async {
     final response = await remoteDatasource.getExerciseResult(
       exerciseId: exerciseId,
       email: '',
     );
+
+    if (response.data?.result?.jumlahScore == null) {
+      return null;
+    }
 
     final data = ExerciseResultResponseEntity(
       status: response.status ?? -1,
@@ -60,10 +64,8 @@ class CourseRepositoryImpl implements CourseRepository {
           fileCourse: response.data?.exercise?.fileCourse ?? '',
           icon: response.data?.exercise?.icon ?? '',
           exerciseTitle: response.data?.exercise?.exerciseTitle ?? '',
-          exerciseDescription:
-              response.data?.exercise?.exerciseDescription ?? '',
-          exerciseInstruction:
-              response.data?.exercise?.exerciseInstruction ?? '',
+          exerciseDescription: response.data?.exercise?.exerciseDescription ?? '',
+          exerciseInstruction: response.data?.exercise?.exerciseInstruction ?? '',
           countQuestion: response.data?.exercise?.countQuestion ?? '',
           classFk: response.data?.exercise?.classFk ?? '',
           courseFk: response.data?.exercise?.courseFk ?? '',
@@ -91,8 +93,7 @@ class CourseRepositoryImpl implements CourseRepository {
   }
 
   @override
-  Future<List<ExerciseDataEntity>?> getExercisesByCourse(
-      String courseId) async {
+  Future<List<ExerciseDataEntity>?> getExercisesByCourse(String courseId) async {
     final response = await remoteDatasource.getExercises(
       courseId: courseId,
       email: '',
@@ -124,12 +125,15 @@ class CourseRepositoryImpl implements CourseRepository {
   }
 
   @override
-  Future<QuestionListResponseEntity> getQuestionsByExercise(
-      String exerciseId) async {
+  Future<List<QuestionListDataEntity>?> getQuestionsByExercise(String exerciseId) async {
     final response = await remoteDatasource.getQuestions(
       exerciseId: exerciseId,
       email: '',
     );
+
+    if ((response.data ?? []).isEmpty) {
+      return null;
+    }
 
     final data = QuestionListResponseEntity(
       status: response.status ?? -1,
@@ -157,7 +161,7 @@ class CourseRepositoryImpl implements CourseRepository {
           .toList(),
     );
 
-    return data;
+    return data.data;
   }
 
   @override

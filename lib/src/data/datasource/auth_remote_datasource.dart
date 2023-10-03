@@ -52,4 +52,27 @@ class AuthRemoteDatasource {
       return UserResponseModel();
     }
   }
+
+  Future<UserResponseModel?> editUserProfile({required String email}) async {
+    try {
+      const String url = 'https://edspert.widyaedu.com/users/update';
+
+      final result = await client.get(
+        url,
+        queryParameters: {
+          'email': email,
+        },
+        options: Options(
+          headers: {'x-api-key': '18be70c0-4e4d-44ff-a475-50c51ece99a0'},
+        ),
+      );
+
+      final userData = UserResponseModel.fromJson(result.data);
+
+      return userData;
+    } catch (error, stacktrace) {
+      log(error.toString(), stackTrace: stacktrace);
+      return null;
+    }
+  }
 }

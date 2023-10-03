@@ -13,7 +13,7 @@ abstract class CourseRepository {
   Future<List<ExerciseDataEntity>?> getExercisesByCourse(String courseId);
 
   /// Do Exercise
-  Future<QuestionListResponseEntity> getQuestionsByExercise(String exerciseId);
+  Future<List<QuestionListDataEntity>?> getQuestionsByExercise(String exerciseId);
   Future<bool> submitExerciseAnswer(SubmitAnswerRequestModel request);
-  Future<ExerciseResultResponseEntity> getExerciseResult(String exerciseId);
+  Future<ExerciseResultResponseEntity?> getExerciseResult(String exerciseId);
 }

@@ -33,3 +33,36 @@ class ErrorIsUserRegisteredState extends AuthState {
 
   ErrorIsUserRegisteredState({required this.message});
 }
+
+/// Sign Out
+class LoadingSignOutState extends AuthState {}
+
+class SuccessSignOutState extends AuthState {}
+
+class ErrorSignOutState extends AuthState {
+  final String message;
+
+  ErrorSignOutState({required this.message});
+}
+
+/// Register User
+class LoadingRegisterUserState extends AuthState {}
+
+class SuccessRegisterUserState extends AuthState {}
+
+class ErrorRegisterUserState extends AuthState {
+  final String message;
+
+  ErrorRegisterUserState({required this.message});
+}
+
+/// Get User Profile
+class LoadingGetUserProfileState extends AuthState {}
+
+class SuccessGetUserProfileState extends AuthState {}
+
+class ErrorGetUserProfileState extends AuthState {
+  final String message;
+
+  ErrorGetUserProfileState({required this.message});
+}

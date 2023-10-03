@@ -1,5 +1,5 @@
-import 'package:learning/src/domain/entity/exercise_list_response_entity.dart';
-import 'package:learning/src/domain/repository/course_repository.dart';
+import '../../entity/exercise_list_response_entity.dart';
+import '../../repository/course_repository.dart';
 
 class GetExercisesByCourseUsecase {
   final CourseRepository repository;

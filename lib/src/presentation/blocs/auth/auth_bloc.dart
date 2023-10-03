@@ -5,6 +5,8 @@ import 'package:learning/src/domain/usecase/auth_usecases/is_signed_in_with_goog
 import 'package:learning/src/domain/usecase/auth_usecases/is_user_registered_usecase.dart';
 import 'package:learning/src/domain/usecase/auth_usecases/sign_in_with_google_usecase.dart';
 
+import '../../../domain/usecase/auth_usecases/sign_out_usecase.dart';
+
 part 'auth_event.dart';
 part 'auth_state.dart';
 
@@ -12,11 +14,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IsSignedInWithGoogleUsecase isSignedInWithGoogleUsecase;
   final IsUserRegisteredUsecase isUserRegisteredUsecase;
   final SignInWithGoogleUsecase signInWithGoogleUsecase;
+  final SignOutUsecase signOutUsecase;
 
   AuthBloc(
     this.isSignedInWithGoogleUsecase,
     this.isUserRegisteredUsecase,
     this.signInWithGoogleUsecase,
+    this.signOutUsecase,
   ) : super(InitAuthState()) {
     on<AuthEvent>((event, emit) async {
       if (event is SignInWithGoogleEvent) {

@@ -66,10 +66,10 @@ class _CourseListScreenState extends State<CourseListScreen> {
         if (courseState is SuccessGetCoursesState) {
           body = ListView.separated(
             padding: Margins.paddingPage,
-            itemCount: courseState.data!.length,
+            itemCount: courseState.data.length,
             separatorBuilder: (context, index) => const SizedBox(height: 15),
             itemBuilder: (context, index) {
-              CourseDataEntity data = courseState.data![index];
+              CourseDataEntity data = courseState.data[index];
               return CourseListItemWidget(data: data);
             },
           );

@@ -1,11 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learning/src/presentation/blocs/banner/banner_cubit.dart';
-import 'package:learning/src/presentation/screen/home/widgets/banner_builder.dart';
-import 'package:learning/src/presentation/screen/home/widgets/course_builder.dart';
-import 'package:learning/src/presentation/screen/home/widgets/welcoming_widget.dart';
-import 'package:learning/src/presentation/screen/widgets/section_title.dart';
 
 import '../../../data/datasource/banner_remote_datasource.dart';
 import '../../../data/datasource/course_remote_datasource.dart';
@@ -13,11 +8,19 @@ import '../../../data/repository/banner_repository_impl.dart';
 import '../../../data/repository/course_repository_impl.dart';
 import '../../../domain/repository/course_repository.dart';
 import '../../../domain/usecase/courses/get_courses_usecase.dart';
+import '../../../domain/usecase/courses/get_exercise_result_usecase.dart';
 import '../../../domain/usecase/courses/get_exercises_by_course_usecase.dart';
+import '../../../domain/usecase/courses/get_questions_by_exercise_usecase.dart';
+import '../../../domain/usecase/courses/submit_exercise_answer_usecase.dart';
 import '../../../domain/usecase/get_banners_usecase.dart';
+import '../../blocs/banner/banner_cubit.dart';
 import '../../blocs/course/course_bloc.dart';
 import '../../blocs/home_nav/home_nav_cubit.dart';
 import '../../router/routes.dart';
+import '../widgets/section_title.dart';
+import 'widgets/banner_builder.dart';
+import 'widgets/course_builder.dart';
+import 'widgets/welcoming_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -39,6 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
             return CourseBloc(
               GetCoursesUsecase(repository: repo),
               GetExercisesByCourseUsecase(repository: repo),
+              GetQuestionsByExerciseUsecase(repository: repo),
+              SubmitExerciseAnswerUsecase(repository: repo),
+              GetExercisesResultUsecase(repository: repo),
             )..add(GetCoursesEvent(majorName: 'IPA'));
           },
         ),

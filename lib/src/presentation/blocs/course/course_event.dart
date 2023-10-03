@@ -13,3 +13,21 @@ class GetExercisesByCourseEvent extends CourseEvent {
 
   GetExercisesByCourseEvent({required this.courseId});
 }
+
+class GetQuestionsByExerciseEvent extends CourseEvent {
+  final String exerciseId;
+
+  GetQuestionsByExerciseEvent({required this.exerciseId});
+}
+
+class SubmitAnswersEvent extends CourseEvent {
+  final SubmitAnswerRequestModel request;
+
+  SubmitAnswersEvent({required this.request});
+}
+
+class GetExerciseResultEvent extends CourseEvent {
+  final String exerciseId;
+
+  GetExerciseResultEvent({required this.exerciseId});
+}
