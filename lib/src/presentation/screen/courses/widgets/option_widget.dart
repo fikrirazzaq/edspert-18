@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
-import '../../../../values/colors.dart';
+import '../../../../core/values/colors.dart';
 
 class OptionWidget extends StatelessWidget {
   final String optionLetter;
@@ -25,7 +25,9 @@ class OptionWidget extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: const Color(0xFFC9C9C9)),
           borderRadius: BorderRadius.circular(10),
-          color: isSelected ? AppColors.bluePrimary.withOpacity(0.71) : Colors.white,
+          color: isSelected
+              ? AppColors.bluePrimary.withOpacity(0.71)
+              : Colors.white,
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

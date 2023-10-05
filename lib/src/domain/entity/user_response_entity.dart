@@ -34,4 +34,19 @@ class UserDataEntity {
     required this.userStatus,
     required this.kelas,
   });
+
+  factory UserDataEntity.fromMap(Map<String, dynamic> map) {
+    return UserDataEntity(
+      iduser: map['iduser'] as String,
+      userName: map['user_name'] as String,
+      userEmail: map['user_email'] as String,
+      userFoto: map['user_foto'] as String,
+      userAsalSekolah: map['user_asal_sekolah'] as String,
+      dateCreate: map['date_create'] as String,
+      jenjang: map['jenjang'] as String,
+      userGender: map['user_gender'] as String,
+      userStatus: map['user_status'] as String,
+      kelas: map['kelas'] as String,
+    );
+  }
 }

@@ -33,7 +33,8 @@ class CourseBloc extends Bloc<CourseEvent, CourseState> {
       if (event is GetCoursesEvent) {
         emit(LoadingGetCoursesState());
 
-        final List<CourseDataEntity>? getCourses = await getCoursesUsecase(event.majorName);
+        final List<CourseDataEntity>? getCourses =
+            await getCoursesUsecase(event.majorName);
         if (getCourses == null) {
           emit(ErrorGetCoursesState('Something wrong'));
         } else {
@@ -43,18 +44,19 @@ class CourseBloc extends Bloc<CourseEvent, CourseState> {
       if (event is GetExercisesByCourseEvent) {
         emit(LoadingGetExercisesByCourseState());
 
-        final List<ExerciseDataEntity>? getExercises = await getExercisesByCourseUsecase(event.courseId);
+        final List<ExerciseDataEntity>? getExercises =
+            await getExercisesByCourseUsecase(event.courseId);
         if (getExercises == null) {
           emit(ErrorGetExercisesByCourseState('Something wrong'));
         } else {
-          print('getExercises: $getExercises');
           emit(SuccessGetExercisesByCourseState(getExercises));
         }
       }
       if (event is GetQuestionsByExerciseEvent) {
         emit(LoadingGetQuestionsByCourseState());
 
-        final List<QuestionListDataEntity>? getQuestions = await getQuestionsByExerciseUsecase(event.exerciseId);
+        final List<QuestionListDataEntity>? getQuestions =
+            await getQuestionsByExerciseUsecase(event.exerciseId);
         if (getQuestions == null) {
           emit(ErrorGetQuestionsByCourseState('Something wrong'));
         } else {
@@ -64,7 +66,8 @@ class CourseBloc extends Bloc<CourseEvent, CourseState> {
       if (event is SubmitAnswersEvent) {
         emit(LoadingSubmitAnswersState());
 
-        final bool submitAnswer = await submitExerciseAnswerUsecase(event.request);
+        final bool submitAnswer =
+            await submitExerciseAnswerUsecase(event.request);
         if (submitAnswer) {
           emit(SuccessSubmitAnswersState());
         } else {
@@ -74,7 +77,8 @@ class CourseBloc extends Bloc<CourseEvent, CourseState> {
       if (event is GetExerciseResultEvent) {
         emit(LoadingGetExercisesResultState());
 
-        final ExerciseResultResponseEntity? exerciseResult = await getExercisesResultUsecase(event.exerciseId);
+        final ExerciseResultResponseEntity? exerciseResult =
+            await getExercisesResultUsecase(event.exerciseId);
         if (exerciseResult == null) {
           emit(ErrorGetExercisesResultState('Something wrong'));
         } else {

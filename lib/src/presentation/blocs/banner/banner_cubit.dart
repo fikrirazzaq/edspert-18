@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learning/src/domain/usecase/get_banners_usecase.dart';
+import 'package:learning/src/domain/usecase/banner/get_banners_usecase.dart';
 
 import '../../../domain/entity/banner_response_entity.dart';
 

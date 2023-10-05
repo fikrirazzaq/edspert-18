@@ -15,7 +15,7 @@ import '../../../domain/usecase/courses/get_exercise_result_usecase.dart';
 import '../../../domain/usecase/courses/get_exercises_by_course_usecase.dart';
 import '../../../domain/usecase/courses/get_questions_by_exercise_usecase.dart';
 import '../../../domain/usecase/courses/submit_exercise_answer_usecase.dart';
-import '../../../domain/usecase/get_banners_usecase.dart';
+import '../../../domain/usecase/banner/get_banners_usecase.dart';
 import '../../blocs/banner/banner_cubit.dart';
 import '../../blocs/course/course_bloc.dart';
 

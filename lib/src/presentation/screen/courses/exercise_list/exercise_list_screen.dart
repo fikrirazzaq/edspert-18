@@ -4,8 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learning/src/domain/entity/exercise_list_response_entity.dart';
 
-import '../../../../values/colors.dart';
-import '../../../../values/margins.dart';
+import '../../../../core/values/colors.dart';
+import '../../../../core/values/margins.dart';
 import '../../../blocs/course/course_bloc.dart';
 import '../widgets/exercise_grid_item_widget.dart';
 
@@ -39,7 +39,9 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
         courseName = args.courseName;
       }
 
-      context.read<CourseBloc>().add(GetExercisesByCourseEvent(courseId: courseId));
+      context
+          .read<CourseBloc>()
+          .add(GetExercisesByCourseEvent(courseId: courseId));
     });
     super.initState();
   }
@@ -49,8 +51,10 @@ class _ExerciseListScreenState extends State<ExerciseListScreen> {
     return BlocBuilder<CourseBloc, CourseState>(
       buildWhen: (prev, next) =>
           next is LoadingGetExercisesByCourseState ||
-          prev is LoadingGetExercisesByCourseState && next is SuccessGetExercisesByCourseState ||
-          prev is LoadingGetExercisesByCourseState && next is ErrorGetExercisesByCourseState,
+          prev is LoadingGetExercisesByCourseState &&
+              next is SuccessGetExercisesByCourseState ||
+          prev is LoadingGetExercisesByCourseState &&
+              next is ErrorGetExercisesByCourseState,
       builder: (context, courseState) {
         Widget body = const SizedBox();
         if (courseState is LoadingGetExercisesByCourseState) {

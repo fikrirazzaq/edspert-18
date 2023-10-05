@@ -12,14 +12,15 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listenWhen: (previous, current) =>
-          previous is LoadingSignInWithGoogleState &&
-              current is SuccessSignInWithGoogleState ||
-          previous is LoadingSignInWithGoogleState &&
-              current is ErrorIsUserRegisteredState ||
-          previous is LoadingIsUserRegisteredState &&
-              current is SuccessIsUserRegisteredState ||
-          previous is LoadingIsUserRegisteredState &&
-              current is ErrorIsUserRegisteredState,
+          (current is LoadingSignInWithGoogleState) ||
+          (previous is LoadingSignInWithGoogleState &&
+              current is SuccessSignInWithGoogleState) ||
+          (previous is LoadingSignInWithGoogleState &&
+              current is ErrorIsUserRegisteredState) ||
+          (previous is LoadingIsUserRegisteredState &&
+              current is SuccessIsUserRegisteredState) ||
+          (previous is LoadingIsUserRegisteredState &&
+              current is ErrorIsUserRegisteredState),
       listener: (context, state) {
         /// Sign In With Google Action Handler
         if (state is SuccessSignInWithGoogleState) {

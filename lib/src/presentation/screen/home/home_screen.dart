@@ -13,7 +13,7 @@ import '../../../domain/usecase/courses/get_exercise_result_usecase.dart';
 import '../../../domain/usecase/courses/get_exercises_by_course_usecase.dart';
 import '../../../domain/usecase/courses/get_questions_by_exercise_usecase.dart';
 import '../../../domain/usecase/courses/submit_exercise_answer_usecase.dart';
-import '../../../domain/usecase/get_banners_usecase.dart';
+import '../../../domain/usecase/banner/get_banners_usecase.dart';
 import '../../blocs/banner/banner_cubit.dart';
 import '../../blocs/course/course_bloc.dart';
 import '../../blocs/home_nav/home_nav_cubit.dart';
@@ -108,7 +108,9 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 8),
               BlocBuilder<CourseBloc, CourseState>(
                 buildWhen: (previous, current) =>
-                    previous is LoadingGetCoursesState && current is SuccessGetCoursesState,
+                    current is LoadingGetCoursesState ||
+                    (previous is LoadingGetCoursesState &&
+                        current is SuccessGetCoursesState),
                 builder: (context, courseState) {
                   if (courseState is LoadingGetCoursesState) {
                     return const Center(child: CircularProgressIndicator());

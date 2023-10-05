@@ -17,7 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      bool isSignedInWithGoogle = context.read<AuthBloc>().isUserSignedInWithGoogle();
+      bool isSignedInWithGoogle =
+          context.read<AuthBloc>().isUserSignedInWithGoogle();
       if (isSignedInWithGoogle) {
         context.read<AuthBloc>().add(IsUserRegisteredEvent());
       } else {
@@ -31,8 +32,11 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listenWhen: (previous, current) =>
-          previous is LoadingIsUserRegisteredState && current is SuccessIsUserRegisteredState ||
-          previous is LoadingIsUserRegisteredState && current is ErrorIsUserRegisteredState,
+          (current is LoadingIsUserRegisteredState) ||
+          (previous is LoadingIsUserRegisteredState &&
+              current is SuccessIsUserRegisteredState) ||
+          (previous is LoadingIsUserRegisteredState &&
+              current is ErrorIsUserRegisteredState),
       listener: (context, state) {
         if (state is SuccessIsUserRegisteredState) {
           Navigator.of(context).pushReplacementNamed(Routes.homeScreen);

@@ -3,9 +3,9 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learning/src/domain/entity/course_list_response_entity.dart';
 
-import '../../../../values/colors.dart';
-import '../../../../values/margins.dart';
-import '../../../../values/strings.dart';
+import '../../../../core/values/colors.dart';
+import '../../../../core/values/margins.dart';
+import '../../../../core/values/strings.dart';
 import '../../../blocs/course/course_bloc.dart';
 import '../widgets/course_list_item_widget.dart';
 

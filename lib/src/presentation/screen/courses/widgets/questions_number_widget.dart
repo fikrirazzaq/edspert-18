@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../domain/entity/question_list_response_entity.dart';
-import '../../../../values/colors.dart';
+import '../../../../core/values/colors.dart';
 
 class QuestionsNumberWidget extends StatelessWidget {
   final List<QuestionListDataEntity> questions;
@@ -25,9 +25,7 @@ class QuestionsNumberWidget extends StatelessWidget {
           (index) {
             bool isSelected = index <= activeQuestionIndex;
             return InkWell(
-              onTap: () {
-
-              },
+              onTap: () {},
               child: Container(
                 decoration: BoxDecoration(
                   border: Border.all(
