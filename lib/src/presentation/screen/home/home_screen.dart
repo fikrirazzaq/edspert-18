@@ -19,8 +19,8 @@ import '../../blocs/course/course_bloc.dart';
 import '../../blocs/home_nav/home_nav_cubit.dart';
 import '../../router/routes.dart';
 import '../widgets/section_title.dart';
-import 'widgets/banner_builder.dart';
-import 'widgets/course_builder.dart';
+import 'widgets/banner_list_widget.dart';
+import 'widgets/course_list_widget.dart';
 import 'widgets/welcoming_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
 
                   if (bannerState is BannerSuccess) {
-                    return BannerBuilder(bannerList: bannerState.banner.data);
+                    return BannerListWidget(bannerList: bannerState.banner.data);
                   }
 
                   return const SizedBox.shrink();
@@ -109,15 +109,14 @@ class _HomeScreenState extends State<HomeScreen> {
               BlocBuilder<CourseBloc, CourseState>(
                 buildWhen: (previous, current) =>
                     current is LoadingGetCoursesState ||
-                    (previous is LoadingGetCoursesState &&
-                        current is SuccessGetCoursesState),
+                    (previous is LoadingGetCoursesState && current is SuccessGetCoursesState),
                 builder: (context, courseState) {
                   if (courseState is LoadingGetCoursesState) {
                     return const Center(child: CircularProgressIndicator());
                   }
 
                   if (courseState is SuccessGetCoursesState) {
-                    return CourseBuilder(courseList: courseState.data ?? []);
+                    return CourseListWidget(courseList: courseState.data ?? []);
                   }
                   return const SizedBox.shrink();
                 },

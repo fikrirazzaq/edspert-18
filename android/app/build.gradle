@@ -29,7 +29,7 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    namespace "id.edspert.learning18"
+    namespace "id.edspert.elearning"
     compileSdkVersion 33
 
     compileOptions {
@@ -47,7 +47,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "id.edspert.learning18"
+        applicationId "id.edspert.elearning"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion 21
@@ -63,6 +63,8 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+
 }
 
 flutter {

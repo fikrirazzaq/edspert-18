@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:755227751239:android:f8e4b1308d138f58105262",
         "android_client_info": {
-          "package_name": "id.edspert.learning18"
+          "package_name": "id.edspert.learning19"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "755227751239-k501her9n2uf3skrutj2ieunjrkhl57c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "id.edspert.learning18",
+            "package_name": "id.edspert.learning19",
             "certificate_hash": "bb8ae11f84423ae44329f248b2ba3fe9f71c5b67"
           }
         },

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:learning/src/domain/entity/banner_response_entity.dart';
 
-class BannerBuilder extends StatelessWidget {
+class BannerListWidget extends StatelessWidget {
   final List<BannerDataEntity> bannerList;
 
-  const BannerBuilder({super.key, required this.bannerList});
+  const BannerListWidget({super.key, required this.bannerList});
 
   @override
   Widget build(BuildContext context) {
